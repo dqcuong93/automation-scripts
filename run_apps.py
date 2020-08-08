@@ -1,7 +1,7 @@
 import subprocess
 
 apps = (
-    'message',
+    'messages',
     'skype',
     'zalo',
     'messenger',
