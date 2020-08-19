@@ -5,6 +5,7 @@ apps = (
     'skype',
     'zalo',
     'messenger',
+    'twitter',
     'slack',
     'viber',
     'telegram',
