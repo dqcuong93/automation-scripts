@@ -19,12 +19,27 @@ This script will help you runs your daily apps. Just call it and look at the res
 ## How to run these scipts?
 All these scipts are written in `Python` scripting language. To run, first you must have `Python 3` in your system, 
 then use:
-```python
+```zsh
 python3 <your .py file>
 ```
 For example:
-```python
+```zsh
 python3 run_apps.py
+```
+
+## Create aliases to run those scripts on Mac terminal
+Create aliases in your ```.zshrc``` file on your Mac:
+```zsh
+alias <name-of-alias>="python3 path/to/your/file"
+```
+For example:
+```zsh
+alias run-apps-script="python3 /Users/chrisdao/Projects/CodingBros/automation-scripts/MacOS/run_apps.py"
+alias change-ssh-key-script="python3 /Users/chrisdao/Projects/CodingBros/automation-scripts/MacOS/change_ssh_private_key.py"
+```
+After setting up. To run, in your Mac terminal, run this command and enjoy :)
+```zsh
+run-apps-script
 ```
 
 ## Contributing
