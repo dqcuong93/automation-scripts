@@ -1,10 +1,11 @@
-
 # MacOS-automation-scripts 
-Python automation scripts help your life easier
+Python automation scripts help your life easier.
+
+This does most of your daily life works.
 
 ## GPG encryption
 Encrypt your file by GPG (or GnuPG) with US Government standard `AES256`. 
-Go to folder `encrypt_files_by_gpg` to have a better look at it.
+Go to folder `encrypt_files_by_gpg` to see more detail.
 
 ## SSH key changing
 File: `change_ssh_private_key.py`. 
@@ -37,7 +38,8 @@ For example:
 alias run-apps-script="python3 /Users/chrisdao/Projects/CodingBros/automation-scripts/MacOS/run_apps.py"
 alias change-ssh-key-script="python3 /Users/chrisdao/Projects/CodingBros/automation-scripts/MacOS/change_ssh_private_key.py"
 ```
-After setting up. To run, in your Mac terminal, run this command and enjoy :)
+After setting up. To run, in your Mac terminal, run commands and enjoy :)
+For example:
 ```zsh
 run-apps-script
 ```

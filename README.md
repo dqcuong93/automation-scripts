@@ -1,11 +1,13 @@
 # automation-scripts
-PyThon automation scripts help your life easier
+Automation scripts help your life easier, it does most of your daily work.
+
+Written in Python.
 
 ## EDX-scripts
-Go to folder "EDX-"platform" to have a better look at it.
+Go to folder "EDX-"platform" to have a better detail at it.
 
 ## MacOS-scripts
-Go to folder "MacOs" to have a better look at it.
+Go to folder "MacOs" to have a better detail look at it.
 
 ## Contributing
 Author: Chris Dao (dqcuong93@gmail.com)
