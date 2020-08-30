@@ -2,9 +2,7 @@
 PyThon automation scripts help your life easier
 
 ## EDX-scripts
-Automatically run EDX code by script
-
-Fetch those files to your local machine then run it in your bash/zsh command line interface.
+Go to folder "EDX-"platform" to have a better look at it.
 
 ## MacOS-scripts
 Go to folder "MacOs" to have a better look at it.
