@@ -1,5 +1,5 @@
 
-# Automation Scripts 
+# MacOS-automation-scripts 
 Python automation scripts help your life easier
 
 ## GPG encryption
