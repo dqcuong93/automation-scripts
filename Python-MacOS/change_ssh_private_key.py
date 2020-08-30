@@ -1,5 +1,6 @@
 import subprocess
 
+
 def choose_ssh_file():
     '''This function will set the ssh private key file automatically.
     Based on what user input ("cuong" or "vcs"), the program will set the correspondent ssh identity variable.
@@ -27,6 +28,7 @@ def choose_ssh_file():
         else:
             print('No SSH file found! Exit!')
             break
+
 
 if __name__ == '__main__':
     choose_ssh_file()
