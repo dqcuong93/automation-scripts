@@ -35,8 +35,11 @@ alias <name-of-alias>="python3 path/to/your/file"
 ```
 For example:
 ```zsh
-alias run-apps-script="python3 /Users/chrisdao/Projects/CodingBros/automation-scripts/MacOS/run_apps.py"
-alias change-ssh-key-script="python3 /Users/chrisdao/Projects/CodingBros/automation-scripts/MacOS/change_ssh_private_key.py"
+# Create alias to automation scripts
+alias py=python3
+alias run-apps-script="py /Users/chrisdao/Projects/CodingBros/automation-scripts/Python-MacOS/run_apps.py"
+alias change-ssh-key-script="py /Users/chrisdao/Projects/CodingBros/automation-scripts/Python-MacOS/change_ssh_private_key.py"
+alias create-web-link-script="py /Users/chrisdao/Projects/CodingBros/automation-scripts/Python-MacOS/create-web-link.py"
 ```
 After setting up. To run, in your Mac terminal, run commands and enjoy :)
 For example:
