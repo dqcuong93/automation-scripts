@@ -26,7 +26,7 @@ def choose_ssh_file():
 
             # run() returns a CompletedProcess object if it was successful
             # errors in the created process are raised here too
-            process = subprocess.run(
+            subprocess.run(
                 command,
                 shell=True,
                 check=True,

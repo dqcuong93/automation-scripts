@@ -23,12 +23,11 @@ def code_checked(path_to_file):
     process = subprocess.run(
         list_of_commands,
         shell=True,
-        # check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True,
     )
-    print(f"\nOUTPUT: \n{process.stdout}\nERROR/WARNING: \n{process.stderr}")
+    print(f"\n{process.stdout}\n{process.stderr}")
 
 
 if __name__ == "__main__":
