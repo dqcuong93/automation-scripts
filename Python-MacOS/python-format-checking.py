@@ -1,15 +1,35 @@
+import subprocess
+
 import click
+
+APPS = [
+    "black",
+    "isort",
+    "flake8",
+]
 
 
 @click.command()
-@click.option('--count', default=1, help='Number of greetings.')
-@click.option('--name', prompt='Your name',
-              help='The person to greet.')
-def hello(count, name):
-    """Simple program that greets NAME for a total of COUNT times."""
-    for x in range(count):
-        click.echo('Hello %s!' % name)
+@click.argument("path-to-file")
+def code_checked(path_to_file):
+    """Python check code formatting"""
+
+    list_of_commands = ""
+    print("Running:")
+    for a in APPS:
+        list_of_commands += " ".join([a, path_to_file, "; "])
+        print(f"~> {a + ' ' + path_to_file}")
+
+    process = subprocess.run(
+        list_of_commands,
+        shell=True,
+        # check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+    )
+    print(f"\nOUTPUT: \n{process.stdout}\nERROR/WARNING: \n{process.stderr}")
 
 
-if __name__ == '__main__':
-    hello()
+if __name__ == "__main__":
+    code_checked()
