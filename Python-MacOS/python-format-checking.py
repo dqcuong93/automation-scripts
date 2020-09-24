@@ -1,8 +1,15 @@
 import subprocess
 
-import click
+try:
+    import click
+except ModuleNotFoundError:
+    print(
+        "\n~~~WARNING~~~\n"
+        "Sorry! You must have Click module in your virtual environment in Python-MacOS folder\n"
+        "Please be aware that I have left the requirements.txt for you!\n"
+    )
 
-APPS = [
+MODULES = [
     "black",
     "isort",
     "flake8",
@@ -10,15 +17,16 @@ APPS = [
 
 
 @click.command()
-@click.argument("path-to-file")
+@click.argument("path-to-file", nargs=-1)
 def code_checked(path_to_file):
     """Python check code formatting"""
 
-    list_of_commands = ""
+    # Create list of command
+    list_of_commands = "".join(
+        [(module + " " + path + "; ") for module in MODULES for path in path_to_file]
+    )
+
     print("Checking your code!...")
-    for a in APPS:
-        list_of_commands += " ".join([a, path_to_file, "; "])
-        print(f"~> {a + ' ' + path_to_file}")
 
     process = subprocess.run(
         list_of_commands,
