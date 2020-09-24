@@ -9,6 +9,9 @@ Go to folder "EDX-"platform" to have a better detail at it.
 ## MacOS-scripts
 Go to folder "MacOs" to have a better detail look at it.
 
+### Some requirements
+When writting these scripts. I use MacOS Catalina version 10.15.6 with ZSH shell. And Python version 3.8.5.
+
 ## Contributing
 Author: Chris Dao (dqcuong93@gmail.com)
 

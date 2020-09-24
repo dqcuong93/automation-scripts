@@ -17,6 +17,16 @@ File: `run_apps.py`.
 
 This script will help you runs your daily apps. Just call it and look at the result.
 
+## Create web link file
+File: `create-web-link.py`. 
+
+This script will help you create a file link to a HTTP URL. The file should has ".url" suffix.
+
+## Python automatic code formatting checked
+File: `python-format-checking.py`.
+
+This script will help you check your Python code format, using Black, Flake8 and Isort. Just call it and look at the result.
+
 ## How to run these scipts?
 All these scipts are written in `Python` scripting language. To run, first you must have `Python 3` in your system, 
 then use:
