@@ -1,11 +1,12 @@
-import subprocess
-
+# Import required modules
 try:
+    import subprocess
     import click
 except ModuleNotFoundError:
     print(
         "\n~~~WARNING~~~\n"
-        "Sorry! You must have Click module in your virtual environment in Python-MacOS folder\n"
+        "Sorry! You must have required module(s) "
+        "in your virtual environment in Python-MacOS folder\n"
         "Please be aware that I have left the requirements.txt for you!\n"
     )
 
@@ -19,7 +20,15 @@ MODULES = [
 @click.command()
 @click.argument("path-to-file", nargs=-1)
 def code_checked(path_to_file):
-    """Python check code formatting"""
+
+    """Python code formatting check
+
+    This program help you check your Python code format.
+    You can check one or more files at a time.
+    example: python3 python-format-checking.py <file_1> <file_2> | or a whole folder <folder_1>
+    :param path_to_file: input your path to file here
+    :return:
+    """
 
     # Create list of command
     list_of_commands = "".join(
