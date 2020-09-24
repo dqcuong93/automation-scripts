@@ -27,7 +27,7 @@ def run_apps():
 
     # run() returns a CompletedProcess object if it was successful
     # errors in the created process are raised here too
-    process = subprocess.run(
+    subprocess.run(
         list_of_commands,
         shell=True,
         check=True,
