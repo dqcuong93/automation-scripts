@@ -1,6 +1,7 @@
 # Import required modules
+import subprocess
+
 try:
-    import subprocess
     import click
 except ModuleNotFoundError:
     print(
@@ -35,7 +36,7 @@ def code_checked(path_to_file):
         [(module + " " + path + "; ") for module in MODULES for path in path_to_file]
     )
 
-    print("Checking your code!...")
+    print("Checking your code...")
 
     process = subprocess.run(
         list_of_commands,

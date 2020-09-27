@@ -14,7 +14,7 @@ APPS_NAME = (
     "whatsapp",
     "jira",
     "spark",
-    "mail",
+    # "mail",
 )
 
 
@@ -27,13 +27,14 @@ def run_apps():
 
     # run() returns a CompletedProcess object if it was successful
     # errors in the created process are raised here too
-    subprocess.run(
+    process = subprocess.run(
         list_of_commands,
         shell=True,
         check=True,
         stdout=subprocess.PIPE,
         universal_newlines=True,
     )
+    print(process)
 
 
 if __name__ == "__main__":
