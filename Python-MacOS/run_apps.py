@@ -1,7 +1,7 @@
 import subprocess
 
 # Constant go here
-COMMAND = "open -a "
+COMMAND = "open -a"
 APPS_NAME = (
     "messages",
     "skype",
@@ -25,7 +25,7 @@ def run_apps():
 
     # Create list of commands
     for a in APPS_NAME:
-        list_of_commands += COMMAND + a + ";"
+        list_of_commands += " ".join([COMMAND, a, ";"])
 
     # run() returns a CompletedProcess object if it was successful
     # errors in the created process are raised here too
@@ -40,7 +40,7 @@ def run_apps():
     except Exception:
         return print(f"Error when opening application(s)")
     else:
-        return print(f"Commands run: {process.args.split(';')}")
+        return print(f"Commands run: {process.args.split(' ;')}")
 
 
 if __name__ == "__main__":
