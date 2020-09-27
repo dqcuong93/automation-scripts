@@ -14,11 +14,13 @@ APPS_NAME = (
     "whatsapp",
     "jira",
     "spark",
-    # "mail",
 )
 
 
 def run_apps():
+    """Run your daily applications
+    If you want to change you apps, just modify the constant APPS_NAME above
+    """
     list_of_commands = ""
 
     # Create list of commands
@@ -27,14 +29,18 @@ def run_apps():
 
     # run() returns a CompletedProcess object if it was successful
     # errors in the created process are raised here too
-    process = subprocess.run(
-        list_of_commands,
-        shell=True,
-        check=True,
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-    print(f"Commands run: {process.args.split(';')}")
+    try:
+        process = subprocess.run(
+            list_of_commands,
+            shell=True,
+            check=True,
+            stdout=subprocess.PIPE,
+            universal_newlines=True,
+        )
+    except Exception:
+        return print(f"Error when opening application(s)")
+    else:
+        return print(f"Commands run: {process.args.split(';')}")
 
 
 if __name__ == "__main__":
