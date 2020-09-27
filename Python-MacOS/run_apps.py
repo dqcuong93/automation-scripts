@@ -34,7 +34,7 @@ def run_apps():
         stdout=subprocess.PIPE,
         universal_newlines=True,
     )
-    print(process)
+    print(f"Commands run: {process.args.split(';')}")
 
 
 if __name__ == "__main__":
