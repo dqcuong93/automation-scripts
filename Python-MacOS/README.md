@@ -57,7 +57,6 @@ alias run-apps-script="auto-scripts-path && py run_apps.py"
 alias change-ssh-key-script="auto-scripts-path && py change_ssh_private_key.py"
 alias create-web-link-script="auto-scripts-pat && py  create-web-link.py"
 alias code-format-check="auto-scripts-path && py python-format-checking.py"
-
 ```
 After setting up. To run, in your Mac terminal, run commands and enjoy :)
 For example:
