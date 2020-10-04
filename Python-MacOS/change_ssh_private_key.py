@@ -1,4 +1,5 @@
 import subprocess
+from shlex import quote as shlex_quote
 
 
 def choose_ssh_file():
@@ -22,10 +23,11 @@ def choose_ssh_file():
         if ssh_file_name in existing_ssh_file:  # Check if SSH file name exist
             ssh_file = existing_ssh_file[ssh_file_name]  # Get value of key
 
-            command = f"ssh-add -D && ssh-add ~/.ssh/{ssh_file}"
+            # shlex_quote lets you plug the security hole
+            command = f"ssh-add -D && ssh-add ~/.ssh/{shlex_quote(ssh_file)}"
 
             # run() returns a CompletedProcess object if it was successful
-            # errors in the created process are raised here too
+            # Errors in the created process are raised here too
             subprocess.run(
                 command,
                 shell=True,

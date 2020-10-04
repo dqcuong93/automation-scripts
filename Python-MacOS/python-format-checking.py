@@ -21,7 +21,6 @@ MODULES = [
 @click.command()
 @click.argument("path-to-file", nargs=-1)
 def code_checked(path_to_file):
-
     """Python code formatting check
 
     This program help you check your Python code format.
