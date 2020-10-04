@@ -15,7 +15,7 @@ def choose_ssh_file():
 
     while True:
         ssh_file_name = input(
-            f"Choose your ssh file name {[key for key in existing_ssh_file]}:\n--> "
+            f"Choose your ssh file name {list(existing_ssh_file)}:\n--> "
         )  # Prompt input
         ssh_file_name = ssh_file_name.strip()  # Remove all whitespace
 
