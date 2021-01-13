@@ -10,7 +10,7 @@ APPS_NAME = (
     "twitter",
     "slack",
     "viber",
-    "telegram\ desktop",
+    "telegram",
     "whatsapp",
     "jira",
     "spark",
