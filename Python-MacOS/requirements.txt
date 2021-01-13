@@ -2,3 +2,4 @@ black
 click
 flake8
 isort
+eradicate
