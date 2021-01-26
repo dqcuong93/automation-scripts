@@ -15,6 +15,7 @@ MODULES = [
     "black",
     "isort",
     "flake8",
+    "eradicate",
 ]
 
 
