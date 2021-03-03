@@ -14,6 +14,7 @@ APPS_NAME = (
     "whatsapp",
     "jira",
     "spark",
+    "jandi",
 )
 
 
