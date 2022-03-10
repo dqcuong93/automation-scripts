@@ -12,11 +12,12 @@ def choose_ssh_file():
     existing_ssh_file = {
         "cuong": "dqcuong93@gmail.com",
         "vcs": "cuong@vietnam-cloud.vn",
+        "gk": "cuong.dao@goldenkey-software.com",
     }
 
     while True:
         ssh_file_name = input(
-            f"Choose your ssh file name {list(existing_ssh_file)}:\n--> "
+            f"Choose your ssh file name in {list(existing_ssh_file)=}:\n--> "
         )  # Prompt input
         ssh_file_name = ssh_file_name.strip()  # Remove all whitespace
 
