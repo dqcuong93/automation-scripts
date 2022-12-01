@@ -39,8 +39,8 @@ def run_apps():
                 Error report: {Exception}
                 """
             )
-
         print(f"This command has been run ==> {process.args}")
+    print("Finished calling applications")
 
 
 if __name__ == "__main__":
