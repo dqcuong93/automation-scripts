@@ -1,8 +1,8 @@
 import subprocess
 
-# Constant go here
+# Constants go here
 COMMAND = "open -a"
-APPS_NAME = (
+WORK_APP = (
     "messages",
     "skype",
     "zalo",
@@ -15,16 +15,43 @@ APPS_NAME = (
     "mail",
     "docker",
 )
+HOME_APPS = (
+    "messages",
+    "skype",
+    "zalo",
+    "messenger",
+    "viber",
+    "telegram\ desktop",
+    "whatsapp",
+)
+ENV = {"home": HOME_APPS, "work": WORK_APP}
 
 
-def run_apps():
+def run_apps() -> None:
     """Run your daily applications
+
     If you want to change you apps, just modify the constant APPS_NAME above
+
+    Returns: None
+
     """
+
+    apps = []
+
+    # Let user picks which environment they want
+    env = input(f"Choose your environment: {[env for env in ENV]}\n")
+    env = env.lower().strip()  # Remove whitespace
+
+    if env in ENV:  # Check if user input the exits environment or not
+        apps = ENV[env]  # Get the applications list
+        print("\nFinished fetching applications!")
+    else:
+        return print("Please enter the correct environments listed above!")
 
     # run() returns a CompletedProcess object if it was successful
     # errors in the created process are raised here too
-    for app in APPS_NAME:
+    print("Begin running applications\n\n")
+    for app in apps:
         try:
             process = subprocess.run(
                 f"{COMMAND} {app}",
@@ -40,8 +67,8 @@ def run_apps():
                 Error report: {Exception}
                 """
             )
-        print(f"Running command ==> {process.args}")
-    print("Finished calling applications")
+        print(f"~> {process.args}")
+    print("\n\nFinished calling applications")
 
 
 if __name__ == "__main__":
