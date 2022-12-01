@@ -1,3 +1,8 @@
+"""Python conventions checking
+This is a scripting file that will check and verify your code
+for Python coding conventions.
+"""
+
 # Import required modules
 import subprocess
 
@@ -44,9 +49,10 @@ def code_checked(path_to_file):
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True,
+        check=True,
     )
     print(f"\n{process.stdout}\n{process.stderr}")
 
 
 if __name__ == "__main__":
-    code_checked()
+    code_checked()  # pylint: disable=no-value-for-parameter

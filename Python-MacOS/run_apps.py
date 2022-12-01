@@ -7,12 +7,10 @@ APPS_NAME = (
     "skype",
     "zalo",
     "messenger",
-    "twitter",
     "slack",
     "viber",
     "telegram\ desktop",
     "whatsapp",
-    "jira",
     "spark",
 )
 
