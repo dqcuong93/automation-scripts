@@ -39,7 +39,7 @@ def run_apps():
                 Error report: {Exception}
                 """
             )
-        print(f"This command has been run ==> {process.args}")
+        print(f"Running command ==> {process.args}")
     print("Finished calling applications")
 
 
