@@ -13,6 +13,7 @@ APPS_NAME = (
     "whatsapp",
     "spark",
     "mail",
+    "docker",
 )
 
 
