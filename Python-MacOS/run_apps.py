@@ -44,13 +44,13 @@ def run_apps() -> None:
 
     if env in ENV:  # Check if user input the exits environment or not
         apps = ENV[env]  # Get the applications list
-        print("\nFinished fetching applications!")
+        print("\nFinished fetching applications based on environment!")
     else:
         return print("Please enter the correct environments listed above!")
 
     # run() returns a CompletedProcess object if it was successful
     # errors in the created process are raised here too
-    print("Begin running applications\n\n")
+    print("Begin running applications\n")
     for app in apps:
         try:
             process = subprocess.run(
@@ -61,13 +61,8 @@ def run_apps() -> None:
                 universal_newlines=True,
             )
         except Exception:
-            return print(
-                f"""
-                Error when opening application(s)
-                Error report: {Exception}
-                """
-            )
-        print(f"~> {process.args}")
+            print(f"{app} may not be installed yet.")
+        print(f"\n~> {process.args}")
     print("\n\nFinished calling applications")
 
 
