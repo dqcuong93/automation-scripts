@@ -30,7 +30,7 @@ ENV = {"home": HOME_APPS, "work": WORK_APP}
 def run_apps() -> None:
     """Run your daily applications
 
-    If you want to change you apps, just modify the constant APPS_NAME above
+    If you want to change you apps, just modify the constant applications name above
 
     Returns: None
 
