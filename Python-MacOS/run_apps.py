@@ -3,7 +3,6 @@ import subprocess
 # Constants go here
 COMMAND = "open -a"
 WORK_APP = (
-    "messages",
     "skype",
     "zalo",
     "messenger",
@@ -12,17 +11,15 @@ WORK_APP = (
     "telegram\ desktop",
     "whatsapp",
     "spark",
-    "mail",
     "docker",
+    "line",
 )
 HOME_APPS = (
-    "messages",
-    "skype",
     "zalo",
     "messenger",
     "viber",
     "telegram\ desktop",
-    "whatsapp",
+    "spark",
 )
 ENV = {"home": HOME_APPS, "work": WORK_APP}
 
