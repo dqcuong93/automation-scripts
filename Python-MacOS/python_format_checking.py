@@ -15,7 +15,7 @@ MODULES = [
     "eradicate",
 ]
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
 def check_dependencies():
