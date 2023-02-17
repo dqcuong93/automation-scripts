@@ -34,20 +34,28 @@ def set_ssh_private_key() -> None:
             ssh_file = ssh_files[ssh_file_name]  # Get value of key
 
             # shlex_quote lets you plug the security hole
-            command = ["ssh-add", "-D", "&&", "ssh-add", f"{SSH_FILE_PATH}{shlex_quote(ssh_file)}"]
+            commands = ["ssh-add", "-D", "&&", "ssh-add", f"{SSH_FILE_PATH}{shlex_quote(ssh_file)}"]
+            command_str = " ".join(commands).strip()
+
+            logging.info(f"Executing command: {command_str}\n")
 
             # run() returns a CompletedProcess object if it was successful
             # Errors in the created process are raised here too
-            subprocess.run(
-                command,
-                check=True,
-                stdout=subprocess.PIPE,
-                universal_newlines=True,
-            )
-            logging.info(f"Successfully added SSH file of {ssh_file_name}")
-            break
+            try:
+                subprocess.run(
+                    command_str,
+                    shell=True,
+                    check=True,
+                    stdout=subprocess.PIPE,
+                    universal_newlines=True,
+                )
+                logging.info(f"\nSuccessfully added SSH file of {ssh_file_name} with {ssh_file}")
+            except subprocess.CalledProcessError as err:
+                logging.warning(f"ERROR: {err}")
+            else:
+                break
         else:
-            logging.info("No SSH file found!!\n")
+            logging.warning("No SSH file found!!\n")
 
 
 if __name__ == "__main__":
