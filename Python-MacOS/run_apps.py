@@ -1,27 +1,26 @@
+import logging
 import subprocess
 
 # Constants go here
 COMMAND = "open -a"
-WORK_APP = (
-    "skype",
-    "zalo",
-    "messenger",
-    "slack",
-    "viber",
-    "telegram\ desktop",
-    "whatsapp",
-    "spark",
-    "docker",
-    "line",
+WORK_APP = frozenset(
+    {
+        "skype",
+        "zalo",
+        "messenger",
+        "slack",
+        "viber",
+        "telegram\ desktop",
+        "whatsapp",
+        "spark",
+        "docker",
+        "line",
+    }
 )
-HOME_APPS = (
-    "zalo",
-    "messenger",
-    "viber",
-    "telegram\ desktop",
-    "spark",
-)
+HOME_APPS = frozenset({"zalo", "messenger", "viber", "telegram\ desktop", "spark"})
 ENV = {"home": HOME_APPS, "work": WORK_APP}
+
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
 def run_apps() -> None:
@@ -36,18 +35,19 @@ def run_apps() -> None:
     apps = []
 
     # Let user picks which environment they want
-    env = input(f"Choose your environment: {[env for env in ENV]}\n")
-    env = env.lower().strip()  # Remove whitespace
+    env = input(f"Choose your environment: {[env for env in ENV]}\n").lower().strip()
 
-    if env in ENV:  # Check if user input the exits environment or not
+    if env in ENV:
         apps = ENV[env]  # Get the applications list
-        print("\nFinished fetching applications based on environment!")
+        logging.info("\nFinished fetching applications based on environment!")
     else:
-        return print("Please enter the correct environments listed above!")
+        return print(
+            f"Invalid environment: {env}.\n" f"Please enter the correct environments listed above"
+        )
 
     # run() returns a CompletedProcess object if it was successful
     # errors in the created process are raised here too
-    print("Begin running applications\n")
+    logging.info("Begin running applications\n")
     for app in apps:
         try:
             process = subprocess.run(
@@ -57,10 +57,10 @@ def run_apps() -> None:
                 stdout=subprocess.PIPE,
                 universal_newlines=True,
             )
-        except Exception:
-            print(f"{app} may not be installed yet.")
-        print(f"\n~> {process.args}")
-    print("\n\nFinished calling applications")
+            logging.info(f"~> {process.args}\n")
+        except subprocess.CalledProcessError as err:
+            logging.warning(f"Error running {app}: {err.stderr}\n{app} may not be installed yet.\n")
+    logging.info("\nFinished calling applications")
 
 
 if __name__ == "__main__":
