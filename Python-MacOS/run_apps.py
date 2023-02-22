@@ -3,7 +3,19 @@ import subprocess
 
 # Constants go here
 COMMAND = "open -a"
-WORK_APP = frozenset(
+WORK_APPS = frozenset(
+    {
+        "zalo",
+        "messenger",
+        "slack",
+        "viber",
+        "telegram\ desktop",
+        "spark",
+        "docker",
+    }
+)
+HOME_APPS = frozenset({"zalo", "messenger", "viber", "telegram\ desktop", "spark"})
+FULL_APPS = frozenset(
     {
         "skype",
         "zalo",
@@ -17,8 +29,11 @@ WORK_APP = frozenset(
         "line",
     }
 )
-HOME_APPS = frozenset({"zalo", "messenger", "viber", "telegram\ desktop", "spark"})
-ENV = {"home": HOME_APPS, "work": WORK_APP}
+ENV = {
+    "home": HOME_APPS,
+    "work": WORK_APPS,
+    "full": FULL_APPS,
+}
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
