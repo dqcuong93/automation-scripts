@@ -5,11 +5,7 @@ import subprocess
 COMMAND = "open -a"
 WORK_APPS = frozenset(
     {
-        "zalo",
-        "messenger",
         "slack",
-        "viber",
-        "telegram\ desktop",
         "spark",
         "docker",
     }
@@ -72,7 +68,7 @@ def run_apps() -> None:
                 stdout=subprocess.PIPE,
                 universal_newlines=True,
             )
-            logging.info(f"~> {process.args}\n")
+            logging.info(f"~> {process.args}")
         except subprocess.CalledProcessError as err:
             logging.warning(f"Error running {app}: {err.stderr}\n{app} may not be installed yet.\n")
     logging.info("\nFinished calling applications")
