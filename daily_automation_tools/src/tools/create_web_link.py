@@ -26,7 +26,3 @@ def create_url_file() -> None:
         file.write(f"[InternetShortcut]\nURL={url}")
 
     logging.info(f"\nFile '{file_name}' created successfully at '{current_directory_path}'.")
-
-
-if __name__ == "__main__":
-    create_url_file()

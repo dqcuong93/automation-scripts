@@ -46,7 +46,7 @@ def code_checked(file_paths: any) -> None:
 
     """
 
-    check_dependencies()
+    # check_dependencies()
 
     command_list = [f"{module} {file_path}" for module in MODULES for file_path in file_paths]
 
@@ -66,7 +66,3 @@ def code_checked(file_paths: any) -> None:
         logging.info(f"\n{process.stdout}\n{process.stderr}")
     except subprocess.CalledProcessError as err:
         logging.error(err)
-
-
-if __name__ == "__main__":
-    code_checked()  # pylint: disable=no-value-for-parameter
