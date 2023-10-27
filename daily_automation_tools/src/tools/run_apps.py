@@ -72,7 +72,3 @@ def run_apps() -> None:
         except subprocess.CalledProcessError as err:
             logging.warning(f"Error running {app}: {err.stderr}\n{app} may not be installed yet.\n")
     logging.info("\nFinished calling applications")
-
-
-if __name__ == "__main__":
-    run_apps()

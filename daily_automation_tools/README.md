@@ -7,6 +7,13 @@ This does most of your daily life works.
 Encrypt your file by GPG (or GnuPG) with US Government standard `AES256`. 
 Go to folder `encrypt_files_by_gpg` to see more detail.
 
+## How to install daily_automation_tools package?
+Install the file daily_automations_tools-2.0.0-py3-none-any.whl package by using pip:
+`pip install daily_automations_tools-2.0.0-py3-none-any.whl`
+
+## How to use
+From terminal run `daily_automation_tools` then choose tool **NUMBER** you want from the menu
+
 ## SSH key changing
 File: `change_ssh_private_key.py`. 
 
@@ -26,40 +33,6 @@ This script will help you create a file link to a HTTP URL. The file should has 
 File: `python-format-checking.py`.
 
 This script will help you check your Python code format, using Black, Flake8 and Isort. Just call it and look at the result.
-
-## How to run these scipts?
-All these scipts are written in `Python` scripting language. To run, first you must have `Python 3` in your system, 
-then use:
-```zsh
-python3 <your .py file>
-```
-For example:
-```zsh
-python3 run_apps.py
-```
-
-## Create aliases to run those scripts on Mac terminal
-Create aliases in your ```.zshrc``` file on your Mac:
-```zsh
-alias <name-of-alias>="python3 path/to/your/file"
-```
-For example:
-```zsh
-# Create alias for Python package and PyCharm Editor
-alias py-editor=charm
-alias py=python3
-
-# Create alias for those automation scripts
-alias run-apps-script="py ~/Projects/Self/automation-scripts/Python-MacOS/run_apps.py "
-alias change-ssh-key-script="py ~/Projects/Self/automation-scripts/Python-MacOS/change_ssh_private_key.py"
-alias create-web-link-script="py ~/Projects/Self/automation-scripts/Python-MacOS/create-web-link.py"
-alias code-format-check="py ~/Projects/Self/automation-scripts/Python-MacOS/python-format-checking.py"
-```
-After setting up. To run, in your Mac terminal, run commands and enjoy :)
-For example:
-```zsh
-run-apps-script
-```
 
 ## Contributing
 Author: Chris Dao (dqcuong93@gmail.com)

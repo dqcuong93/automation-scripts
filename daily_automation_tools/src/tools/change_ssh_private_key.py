@@ -56,7 +56,3 @@ def set_ssh_private_key() -> None:
                 break
         else:
             logging.warning("No SSH file found!!\n")
-
-
-if __name__ == "__main__":
-    set_ssh_private_key()
