@@ -7,7 +7,7 @@ def display_menu():
         5: "Exit",
     }
     print(
-        "=== Automation tools that help you easily run your daily tasks ===\n\n"
+        "\n=== Automation tools that help you easily run your daily tasks ===\n\n"
         "Choose a tool from the menu below:"
     )
     for number, name in tools.items():
@@ -37,23 +37,25 @@ def choices_selection():
     from tools import change_ssh_private_key, create_web_link, run_apps
 
     while True:
+        display_menu()
         choice = int(input("\nSelect NUMBER: "))
-        match choice:
-            case 1:
-                run_apps.run_apps()
-            case 2:
-                format_checking()
-            case 3:
-                create_web_link.create_url_file()
-            case 4:
-                change_ssh_private_key.set_ssh_private_key()
-            case 5:
-                sys.exit()
+        if choice not in list(range(1, 6)):
+            sys.exit("No valid choice, exiting!")
+        else:
+            match choice:
+                case 1:
+                    run_apps.run_apps()
+                case 2:
+                    format_checking()
+                case 3:
+                    create_web_link.create_url_file()
+                case 4:
+                    change_ssh_private_key.set_ssh_private_key()
+                case 5:
+                    sys.exit("Exiting!")
 
 
 def main():
-    display_menu()
-
     try:
         choices_selection()
     except KeyboardInterrupt:
