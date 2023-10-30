@@ -7,6 +7,15 @@ This does most of your daily life works.
 Encrypt your file by GPG (or GnuPG) with US Government standard `AES256`. 
 Go to folder `encrypt_files_by_gpg` to see more detail.
 
+## How to create packaging for distribution?
+First, update version in `setup.py`
+
+`pip install wheel`
+
+`python setup.py bdist_wheel`
+
+Move `.whl` file into same directory as **setup.py**
+
 ## How to install daily_automation_tools package?
 Install the file daily_automations_tools-2.0.0-py3-none-any.whl package by using pip:
 `pip install daily_automations_tools-2.0.0-py3-none-any.whl`
