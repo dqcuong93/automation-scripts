@@ -17,7 +17,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="daily_automations_tools",
-    version="3.0.3",
+    version="3.0.4",
     description="Automation of some daily works you should have",
     long_description=long_description,
     long_description_content_type="text/markdown",
