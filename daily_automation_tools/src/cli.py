@@ -31,28 +31,39 @@ def format_checking():
     python_format_checking.code_checked(file_paths)
 
 
-def choices_selection():
+def script_called(choice):
     import sys
 
     from tools import change_ssh_private_key, create_web_link, run_apps
 
+    if choice not in list(range(1, 6)):
+        sys.exit("No valid choice, exiting!")
+    else:
+        match choice:
+            case 1:
+                run_apps.run_apps()
+            case 2:
+                format_checking()
+            case 3:
+                create_web_link.create_url_file()
+            case 4:
+                change_ssh_private_key.set_ssh_private_key()
+            case 5:
+                sys.exit("Exiting!")
+
+
+def choices_selection():
+    import sys
+
     while True:
         display_menu()
-        choice = int(input("\nSelect NUMBER: "))
-        if choice not in list(range(1, 6)) or choice is not int:
+        choice = input("\nSelect NUMBER: ")
+        try:
+            choice = int(choice)
+        except ValueError:
             sys.exit("No valid choice, exiting!")
         else:
-            match choice:
-                case 1:
-                    run_apps.run_apps()
-                case 2:
-                    format_checking()
-                case 3:
-                    create_web_link.create_url_file()
-                case 4:
-                    change_ssh_private_key.set_ssh_private_key()
-                case 5:
-                    sys.exit("Exiting!")
+            script_called(choice=choice)
 
 
 def main():
