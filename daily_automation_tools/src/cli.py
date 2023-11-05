@@ -39,7 +39,7 @@ def choices_selection():
     while True:
         display_menu()
         choice = int(input("\nSelect NUMBER: "))
-        if choice not in list(range(1, 6)):
+        if choice not in list(range(1, 6)) or choice is not int:
             sys.exit("No valid choice, exiting!")
         else:
             match choice:
