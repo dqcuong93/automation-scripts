@@ -18,18 +18,6 @@ MODULES = [
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
-def check_dependencies():
-    try:
-        import click
-    except ModuleNotFoundError:
-        logging.warning(
-            "\n~~~WARNING~~~\n"
-            "Sorry! You must have required module(s) "
-            "in your Python virtual environment\n"
-            "Please be aware that I have left the requirements.txt for you!\n"
-        )
-
-
 @click.command()
 @click.argument("file_paths", nargs=-1, type=click.Path(exists=True))
 def code_checked(file_paths: any) -> None:
@@ -45,13 +33,8 @@ def code_checked(file_paths: any) -> None:
     Returns: None
 
     """
-
-    # check_dependencies()
-
     command_list = [f"{module} {file_path}" for module in MODULES for file_path in file_paths]
-
     command_str = ";".join(command_list)
-
     logging.info("Checking your code...")
 
     try:
@@ -66,3 +49,7 @@ def code_checked(file_paths: any) -> None:
         logging.info(f"\n{process.stdout}\n{process.stderr}")
     except subprocess.CalledProcessError as err:
         logging.error(err)
+
+
+if __name__ == "__main__":
+    code_checked()
