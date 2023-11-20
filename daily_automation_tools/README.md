@@ -40,6 +40,7 @@ This script will help you create a file link to a HTTP URL. The file should has 
 
 ## Python automatic code formatting checked
 File: `python-format-checking.py`.
+Use like: `code-format python_format_checking.py` .zshrc file has to be setup first.
 
 This script will help you check your Python code format, using Black, Flake8 and Isort. Just call it and look at the result.
 
