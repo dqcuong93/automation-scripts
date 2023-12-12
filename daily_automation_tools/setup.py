@@ -17,7 +17,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="daily_automations_tools",
-    version="3.2.0",
+    version="3.2.1",
     description="Automation of some daily works you should have",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -36,7 +36,7 @@ setup(
     install_requires=["black", "click", "flake8", "isort", "eradicate", "prompt_toolkit"],
     entry_points={
         "console_scripts": [
-            "daily_automation_tools=cli:main",
+            "menu=cli:main",
         ],
     },
     project_urls={
