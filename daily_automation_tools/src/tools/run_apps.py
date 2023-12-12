@@ -6,11 +6,11 @@ COMMAND = "open -a"
 WORK_APPS = frozenset(
     {
         "slack",
-        "spark" + " desktop",
+        "spark\ desktop",
         "docker",
     }
 )
-HOME_APPS = frozenset({"zalo", "messenger", "viber", "telegram" + " desktop", "spark" + " desktop"})
+HOME_APPS = frozenset({"zalo", "messenger", "viber", "telegram\ desktop", "spark\ desktop"})
 FULL_APPS = frozenset(
     {
         "skype",
@@ -18,9 +18,9 @@ FULL_APPS = frozenset(
         "messenger",
         "slack",
         "viber",
-        "telegram" + " desktop",
+        "telegram\ desktop",
         "whatsapp",
-        "spark" + " desktop",
+        "spark\ desktop",
         "docker",
         "line",
     }
