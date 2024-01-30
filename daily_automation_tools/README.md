@@ -21,7 +21,7 @@ Install the file daily_automations_tools-2.0.0-py3-none-any.whl package by using
 `pip install daily_automations_tools-2.0.0-py3-none-any.whl`
 
 ## How to use
-From terminal run `daily_automation_tools` then choose tool **NUMBER** you want from the menu
+From terminal run `menu` then choose tool **NUMBER** you want from the menu
 
 ## SSH key changing
 File: `change_ssh_private_key.py`. 
