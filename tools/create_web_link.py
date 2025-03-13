@@ -1,28 +1,75 @@
-"""Automatically create web link
-Based on what user provided, program will create a web-link file.
+#!/usr/bin/env python3
+"""Web Link Creator.
+
+This script creates Windows-compatible web shortcut (.url) files
+from URLs provided by the user.
+
+Usage:
+    create-web-link [OPTIONS]
+
+Options:
+    -h, --help  Show this help message
+
+Examples:
+    # Create a shortcut to GitHub
+    create-web-link
+    Please copy the url here:
+    --> https://github.com
+    Please input your URL file name:
+    --> github
+
+    # This will create 'github.url' in the current directory
+
+Notes:
+    - Creates Windows-compatible .url files
+    - Files are created in the current working directory
+    - .url extension is automatically added to the filename
+    - Existing files with the same name will be overwritten
+
+Dependencies:
+    click>=8.0.0
+
+Environment:
+    No special environment variables required
 """
 
 import logging
-import os
+from pathlib import Path
 
-logging.basicConfig(level=logging.INFO, format="%(message)s")
+import click
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 
+@click.command(context_settings={"help_option_names": ["-h", "--help"]})
 def create_url_file() -> None:
-    """Create a web-link file based on the user provided URL
+    """Create a Windows-compatible web shortcut (.url) file.
 
-    Returns: None
-
+    The script will prompt for:
+        1. URL to create shortcut for
+        2. Name for the shortcut file
     """
+    try:
+        current_dir = Path.cwd()
 
-    current_directory_path = os.getcwd()  # Get current working directory
-    url = input("Please copy the url here:\n--> ").strip()  # Get user provided url
+        # Get user input
+        url = click.prompt("Please copy the url here", type=str).strip()
+        filename = click.prompt("Please input your URL file name", type=str).strip()
 
-    # Prompt user for filename, and append '.url' to the end of the filename
-    file_name = input("Please input your URL file name:\n--> ").strip() + ".url"
-    file_path = os.path.join(current_directory_path, file_name)
+        # Create file
+        file_path = current_dir / f"{filename}.url"
+        file_path.write_text(f"[InternetShortcut]\nURL={url}", encoding="utf-8")
 
-    with open(file_path, "w", encoding="utf-8") as file:  # Create new file if not exist
-        file.write(f"[InternetShortcut]\nURL={url}")
+        logger.info(f"\n✨ File '{filename}.url' created successfully at '{current_dir}'")
 
-    logging.info(f"\nFile '{file_name}' created successfully at '{current_directory_path}'.")
+    except Exception as e:
+        logger.error(f"Error creating URL file: {e}")
+        raise click.ClickException(str(e))
+
+
+if __name__ == "__main__":
+    create_url_file()

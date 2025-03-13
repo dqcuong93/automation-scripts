@@ -16,3 +16,6 @@ mypy>=1.8.0
 # Security
 bandit>=1.7.7
 safety>=3.0.1
+
+# Click dependency
+click>=8.0.0
