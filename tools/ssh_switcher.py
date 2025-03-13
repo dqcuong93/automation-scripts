@@ -66,10 +66,7 @@ SSH_IDENTITIES: Dict[str, str] = {
     "finsc_bitbucket": "finsc_bitbucket",
 }
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(levelname)s: %(message)s"
-)
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -77,8 +74,7 @@ def verify_ssh_agent() -> None:
     """Verify that ssh-agent is running."""
     if not os.environ.get("SSH_AUTH_SOCK"):
         raise click.ClickException(
-            "SSH agent is not running. Please start it with:\n"
-            "  eval `ssh-agent -s`"
+            "SSH agent is not running. Please start it with:\n" "  eval `ssh-agent -s`"
         )
 
 
@@ -97,8 +93,7 @@ def verify_ssh_key(identity: str) -> Path:
     key_path = SSH_DIR / identity
     if not key_path.is_file():
         raise click.ClickException(
-            f"SSH key not found: {key_path}\n"
-            f"Please ensure the key exists in {SSH_DIR}"
+            f"SSH key not found: {key_path}\n" f"Please ensure the key exists in {SSH_DIR}"
         )
     return key_path
 
@@ -113,12 +108,7 @@ def run_ssh_command(cmd: list[str]) -> None:
         click.ClickException: If the command fails
     """
     try:
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            check=True
-        )
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         if result.stdout:
             logger.info(result.stdout)
     except subprocess.CalledProcessError as e:
@@ -135,16 +125,8 @@ def list_identities() -> None:
 
 
 @click.command(context_settings={"help_option_names": ["-h", "--help"]})
-@click.argument(
-    "identity",
-    type=click.Choice(list(SSH_IDENTITIES.keys())),
-    required=False
-)
-@click.option(
-    "-l", "--list",
-    is_flag=True,
-    help="List available SSH identities"
-)
+@click.argument("identity", type=click.Choice(list(SSH_IDENTITIES.keys())), required=False)
+@click.option("-l", "--list", is_flag=True, help="List available SSH identities")
 def switch_ssh_key(identity: Optional[str], list: bool) -> None:
     """Switch between different SSH identities.
 
@@ -176,7 +158,7 @@ def switch_ssh_key(identity: Optional[str], list: bool) -> None:
             identity = click.prompt(
                 "\nChoose an identity",
                 type=click.Choice(list(SSH_IDENTITIES.keys())),
-                show_choices=False
+                show_choices=False,
             )
 
         key_file = verify_ssh_key(SSH_IDENTITIES[identity])
