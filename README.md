@@ -60,6 +60,7 @@ chmod +x ~/bin/create-web-link ~/bin/format-check ~/bin/ssh-switcher
 After installation, you can use these commands from anywhere in your terminal:
 
 ### Create Web Links (`create-web-link`)
+
 Create web links for various services.
 
 ```bash
@@ -68,7 +69,9 @@ create-web-link jira    # Create Jira ticket link
 ```
 
 ### Format Checker (`format-check`)
+
 Check Python code formatting using various tools:
+
 - black: Code formatting
 - isort: Import sorting
 - flake8: Style guide enforcement
@@ -82,6 +85,7 @@ format-check dir/       # Check directory
 ```
 
 ### SSH Identity Switcher (`ssh-switcher`)
+
 Switch between different SSH identities easily.
 
 ```bash
