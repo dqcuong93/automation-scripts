@@ -11,8 +11,8 @@ Automation scripts help your life easier, it does most of your daily work.
 ## Available Tools
 
 1. `create-web-link`: Create web links
-1. `format-check`: Check Python code formatting
-1. `ssh-switcher`: Switch between SSH identities
+2. `format-check`: Check Python code formatting
+3. `ssh-switcher`: Switch between SSH identities
 
 ## Installation and Usage
 
@@ -107,9 +107,31 @@ pip install -r requirements-dev.txt  # Update dependencies
 
 ## Uninstallation
 
+1. Remove symbolic links:
+
 ```bash
 rm ~/bin/create-web-link ~/bin/format-check ~/bin/ssh-switcher
 ```
+
+2. Remove repository (optional):
+
+```bash
+# From repository root
+cd ..
+rm -rf automation-scripts
+```
+
+3. Remove PATH from ~/.zshrc (optional):
+   - Open ~/.zshrc in your editor
+   - Remove the line: `export PATH="$HOME/bin:$PATH"`
+   - Run: `source ~/.zshrc`
+
+4. Remove bin directory (optional):
+   - Only if no other scripts are using it:
+   
+   ```bash
+   rm -rf ~/bin
+   ```
 
 ## Contributing
 
