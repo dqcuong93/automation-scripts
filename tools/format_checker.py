@@ -12,7 +12,7 @@ Dependencies:
         eradicate>=2.3.0
 
 Usage:
-    python-format-check [OPTIONS] PATH...
+    format-check [OPTIONS] PATH...
 
 Arguments:
     PATH  One or more Python files or directories to check.
@@ -24,16 +24,16 @@ Options:
 
 Examples:
     # Check a single file
-    python-format-check script.py
+    format-check script.py
 
     # Check multiple files
-    python-format-check file1.py file2.py file3.py
+    format-check file1.py file2.py file3.py
 
     # Check all Python files in a directory recursively
-    python-format-check project_directory/
+    format-check project_directory/
 
     # Check with verbose output
-    python-format-check -v script.py
+    format-check -v script.py
 
 Tools Used:
     - black: Code formatter that formats code in a consistent style
@@ -55,7 +55,7 @@ from typing import List, Tuple
 
 import click
 
-FORMATTERS = {
+FORMATTER_COMMANDS = {
     "black": ["black"],
     "isort": ["isort"],
     "flake8": ["flake8"],
@@ -69,7 +69,7 @@ logger = logging.getLogger(__name__)
 def check_dependencies() -> None:
     """Verify all required formatting tools are installed."""
     missing_tools = []
-    for tool in FORMATTERS:
+    for tool in FORMATTER_COMMANDS:
         if not shutil.which(tool):
             missing_tools.append(tool)
 
@@ -91,7 +91,7 @@ def run_formatter(formatter: str, files: List[Path]) -> Tuple[bool, str]:
     Returns:
         Tuple of (success, output)
     """
-    cmd = FORMATTERS[formatter] + [str(f) for f in files]
+    cmd = FORMATTER_COMMANDS[formatter] + [str(f) for f in files]
     try:
         result = subprocess.run(
             cmd,
@@ -104,17 +104,17 @@ def run_formatter(formatter: str, files: List[Path]) -> Tuple[bool, str]:
         return False, f"{e.stdout}\n{e.stderr}"
 
 
-def collect_python_files(file_paths: Tuple[Path, ...]) -> List[Path]:
+def collect_python_files(paths: Tuple[Path, ...]) -> List[Path]:
     """Collect all Python files from the given paths.
 
     Args:
-        file_paths: Tuple of paths to process
+        paths: Tuple of paths to process
 
     Returns:
         List of Path objects pointing to Python files
     """
     files = []
-    for path in file_paths:
+    for path in paths:
         if path.is_dir():
             files.extend(path.glob("**/*.py"))
         else:
@@ -133,7 +133,7 @@ def run_all_formatters(files: List[Path], verbose: bool) -> bool:
         True if all formatters passed, False otherwise
     """
     all_passed = True
-    for formatter in FORMATTERS:
+    for formatter in FORMATTER_COMMANDS:
         logger.info(f"\nRunning {formatter}...")
         success, output = run_formatter(formatter, files)
 
@@ -150,26 +150,26 @@ def run_all_formatters(files: List[Path], verbose: bool) -> bool:
 
 @click.command(context_settings={"help_option_names": ["-h", "--help"]}, no_args_is_help=True)
 @click.argument(
-    "file_paths",
+    "paths",
     nargs=-1,
     type=click.Path(exists=True, path_type=Path),
     required=True,
 )
 @click.option("-v", "--verbose", is_flag=True, help="Show detailed output from formatters")
-def code_checked(file_paths: Tuple[Path, ...], verbose: bool) -> None:
+def check_code(paths: Tuple[Path, ...], verbose: bool) -> None:
     """Check Python code formatting using multiple tools.
 
     Runs black, isort, flake8, and eradicate on the specified Python files
     or directories to ensure consistent code formatting and style.
 
     Example:
-        python-format-check file1.py file2.py
-        python-format-check directory/
+        format-check file1.py file2.py
+        format-check directory/
     """
     try:
         check_dependencies()
 
-        files = collect_python_files(file_paths)
+        files = collect_python_files(paths)
         if not files:
             logger.warning("No Python files found to check")
             return
@@ -187,4 +187,4 @@ def code_checked(file_paths: Tuple[Path, ...], verbose: bool) -> None:
 
 
 if __name__ == "__main__":
-    code_checked()
+    check_code()
