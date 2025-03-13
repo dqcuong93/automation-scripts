@@ -1,54 +1,189 @@
-"""Python conventions checking
-This is a scripting file that will check and verify your code
-for Python coding conventions.
+#!/usr/bin/env python3
+"""Python code formatting checker.
+
+This script checks and verifies Python code against coding conventions
+using multiple formatting tools: black, isort, flake8, and eradicate.
+
+Dependencies:
+    Required packages (install with pip):
+        black>=24.2.0
+        isort>=5.13.2
+        flake8>=7.0.0
+        eradicate>=2.3.0
+
+Usage:
+    python-format-check [OPTIONS] PATH...
+
+Arguments:
+    PATH  One or more Python files or directories to check.
+          For directories, all .py files will be checked recursively.
+
+Options:
+    -v, --verbose  Show detailed output from formatters
+    --help        Show this help message
+
+Examples:
+    # Check a single file
+    python-format-check script.py
+
+    # Check multiple files
+    python-format-check file1.py file2.py file3.py
+
+    # Check all Python files in a directory recursively
+    python-format-check project_directory/
+
+    # Check with verbose output
+    python-format-check -v script.py
+
+Tools Used:
+    - black: Code formatter that formats code in a consistent style
+    - isort: Sorts and formats imports
+    - flake8: Style guide enforcement
+    - eradicate: Removes commented-out code
+
+Exit Status:
+    0 - All checks passed
+    1 - Some formatters reported issues
+    2 - Error occurred during execution (missing dependencies, invalid paths, etc.)
 """
 
 import logging
+import shutil
 import subprocess
+from pathlib import Path
+from typing import List, Tuple
 
 import click
 
-MODULES = [
-    "black",
-    "isort",
-    "flake8",
-    "eradicate",
-]
+FORMATTERS = {
+    "black": ["black"],
+    "isort": ["isort"],
+    "flake8": ["flake8"],
+    "eradicate": ["eradicate"],
+}
 
-logging.basicConfig(level=logging.INFO, format="%(message)s")
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+logger = logging.getLogger(__name__)
 
 
-@click.command()
-@click.argument("file_paths", nargs=-1, type=click.Path(exists=True))
-def code_checked(file_paths: any) -> None:
-    """Python code formatting check
+def check_dependencies() -> None:
+    """Verify all required formatting tools are installed."""
+    missing_tools = []
+    for tool in FORMATTERS:
+        if not shutil.which(tool):
+            missing_tools.append(tool)
 
-    This program help you check your Python code format.
-    You can check one or more files at a time.
-    example: python3 python-format-checking.py <file_1> <file_2> | or a whole folder <folder_1>
+    if missing_tools:
+        tools_str = ", ".join(missing_tools)
+        raise click.ClickException(
+            f"Missing required tools: {tools_str}. "
+            f"Please install with: pip install {' '.join(missing_tools)}"
+        )
+
+
+def run_formatter(formatter: str, files: List[Path]) -> Tuple[bool, str]:
+    """Run a specific code formatter on the given files.
 
     Args:
-        file_paths: your path to file here
+        formatter: Name of the formatter to run
+        files: List of file paths to format
 
-    Returns: None
-
+    Returns:
+        Tuple of (success, output)
     """
-    command_list = [f"{module} {file_path}" for module in MODULES for file_path in file_paths]
-    command_str = ";".join(command_list)
-    logging.info("Checking your code...")
-
+    cmd = FORMATTERS[formatter] + [str(f) for f in files]
     try:
-        process = subprocess.run(
-            command_str,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            universal_newlines=True,
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
             check=True,
         )
-        logging.info(f"\n{process.stdout}\n{process.stderr}")
-    except subprocess.CalledProcessError as err:
-        logging.error(err)
+        return True, result.stdout
+    except subprocess.CalledProcessError as e:
+        return False, f"{e.stdout}\n{e.stderr}"
+
+
+def collect_python_files(file_paths: Tuple[Path, ...]) -> List[Path]:
+    """Collect all Python files from the given paths.
+
+    Args:
+        file_paths: Tuple of paths to process
+
+    Returns:
+        List of Path objects pointing to Python files
+    """
+    files = []
+    for path in file_paths:
+        if path.is_dir():
+            files.extend(path.glob("**/*.py"))
+        else:
+            files.append(path)
+    return files
+
+
+def run_all_formatters(files: List[Path], verbose: bool) -> bool:
+    """Run all formatters on the given files.
+
+    Args:
+        files: List of files to check
+        verbose: Whether to show detailed output
+
+    Returns:
+        True if all formatters passed, False otherwise
+    """
+    all_passed = True
+    for formatter in FORMATTERS:
+        logger.info(f"\nRunning {formatter}...")
+        success, output = run_formatter(formatter, files)
+
+        if not success:
+            all_passed = False
+            logger.error(f"{formatter} found issues:")
+            if verbose or formatter in ["flake8", "eradicate"]:
+                logger.error(output)
+        elif verbose:
+            logger.info(output if output else f"{formatter} passed")
+
+    return all_passed
+
+
+@click.command(context_settings={"help_option_names": ["-h", "--help"]}, no_args_is_help=True)
+@click.argument(
+    "file_paths",
+    nargs=-1,
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+)
+@click.option("-v", "--verbose", is_flag=True, help="Show detailed output from formatters")
+def code_checked(file_paths: Tuple[Path, ...], verbose: bool) -> None:
+    """Check Python code formatting using multiple tools.
+
+    Runs black, isort, flake8, and eradicate on the specified Python files
+    or directories to ensure consistent code formatting and style.
+
+    Example:
+        python-format-check file1.py file2.py
+        python-format-check directory/
+    """
+    try:
+        check_dependencies()
+
+        files = collect_python_files(file_paths)
+        if not files:
+            logger.warning("No Python files found to check")
+            return
+
+        logger.info(f"Checking {len(files)} Python files...")
+
+        if run_all_formatters(files, verbose):
+            logger.info("\n✨ All formatters passed!")
+        else:
+            raise click.ClickException("Some formatters reported issues")
+
+    except Exception as e:
+        logger.error(f"Error during formatting: {e}")
+        raise click.ClickException(str(e))
 
 
 if __name__ == "__main__":

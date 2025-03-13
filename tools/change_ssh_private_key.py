@@ -24,7 +24,7 @@ def set_ssh_private_key() -> None:
         "cuong": "dqcuong93@gmail.com",
         "vcs": "cuong@vietnam-cloud.vn",
         "gk": "cuong.dao@goldenkey-software.com",
-        "finsc_bitbucket": "finsc_bitbucket"
+        "finsc_bitbucket": "finsc_bitbucket",
     }
 
     while True:
