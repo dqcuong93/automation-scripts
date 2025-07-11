@@ -60,9 +60,8 @@ import click
 # SSH configurations
 SSH_DIR = Path.home() / ".ssh"
 SSH_IDENTITIES: Dict[str, str] = {
-    "cuong": "dqcuong93@gmail.com",
-    "vcs": "cuong@vietnam-cloud.vn",
-    "gk": "cuong.dao@goldenkey-software.com",
+    "cuong": "personal",
+    "gk": "cuong_gk",
     "finsc_bitbucket": "finsc_bitbucket",
 }
 
