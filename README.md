@@ -26,14 +26,14 @@ cd automation-scripts
 2. Create bin directory and add to PATH:
 
 ```bash
-mkdir -p ~/bin
-echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+mkdir -p ~/.bin
+echo 'export PATH="$HOME/.bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-> **Why `~/bin` and PATH?**
+> **Why `~/.bin` and PATH?**
 >
-> - `~/bin` is a common convention in Unix-like systems for storing user-specific executable files
+> - `~/.bin` is a common convention in Unix-like systems for storing user-specific executable files
 > - Adding it to PATH allows you to run these scripts from anywhere without specifying the full path
 > - This keeps your scripts organized and easily accessible while following Unix best practices
 
@@ -46,15 +46,15 @@ pip install -r requirements-dev.txt
 4. Create symbolic links for scripts:
 
 ```bash
-ln -sf "$(pwd)/tools/create_web_link.py" ~/bin/create-web-link
-ln -sf "$(pwd)/tools/format_checker.py" ~/bin/format-check
-ln -sf "$(pwd)/tools/ssh_switcher.py" ~/bin/ssh-switcher
+ln -sf "$(pwd)/tools/create_web_link.py" ~/.bin/create-web-link
+ln -sf "$(pwd)/tools/format_checker.py" ~/.bin/format-check
+ln -sf "$(pwd)/tools/ssh_switcher.py" ~/.bin/ssh-switcher
 ```
 
 5. Make scripts executable:
 
 ```bash
-chmod +x ~/bin/create-web-link ~/bin/format-check ~/bin/ssh-switcher
+chmod +x ~/.bin/create-web-link ~/bin/format-check ~/.bin/ssh-switcher
 ```
 
 After installation, you can use these commands from anywhere in your terminal:
