@@ -54,7 +54,7 @@ ln -sf "$(pwd)/tools/ssh_switcher.py" ~/.bin/ssh-switcher
 5. Make scripts executable:
 
 ```bash
-chmod +x ~/.bin/create-web-link ~/bin/format-check ~/.bin/ssh-switcher
+chmod +x ~/.bin/create-web-link ~/.bin/format-check ~/.bin/ssh-switcher
 ```
 
 After installation, you can use these commands from anywhere in your terminal:
