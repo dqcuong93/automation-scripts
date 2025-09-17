@@ -40,7 +40,7 @@ source ~/.zshrc
 3. Install dependencies:
 
 ```bash
-pip install -r requirements-dev.txt
+pip install -r requirements.txt
 ```
 
 4. Create symbolic links for scripts:
