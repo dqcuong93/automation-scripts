@@ -11,7 +11,7 @@ Automation scripts help your life easier, it does most of your daily work.
 ## Available Tools
 
 1. `create-web-link`: Create web links
-2. `format-check`: Check Python code formatting
+2. `format-check`: **Deprecated** — see note below
 3. `ssh-switcher`: Switch between SSH identities
 
 ## Installation and Usage
@@ -47,42 +47,37 @@ pip install -r requirements.txt
 
 ```bash
 ln -sf "$(pwd)/tools/create_web_link.py" ~/.bin/create-web-link
-ln -sf "$(pwd)/tools/format_checker.py" ~/.bin/format-check
 ln -sf "$(pwd)/tools/ssh_switcher.py" ~/.bin/ssh-switcher
 ```
 
 5. Make scripts executable:
 
 ```bash
-chmod +x ~/.bin/create-web-link ~/.bin/format-check ~/.bin/ssh-switcher
+chmod +x ~/.bin/create-web-link ~/.bin/ssh-switcher
 ```
 
 After installation, you can use these commands from anywhere in your terminal:
 
 ### Create Web Links (`create-web-link`)
 
-Create web links for various services.
+Create a cross-platform web shortcut: a small `.html` file that redirects
+to the target URL when opened, so it works the same way on Windows,
+macOS, and Linux (unlike native shortcut formats such as `.url`,
+`.webloc`, or `.desktop`, which are platform-specific).
 
 ```bash
 create-web-link --help  # Show help
-create-web-link jira    # Create Jira ticket link
+create-web-link          # Interactive: prompts for URL and filename
 ```
 
-### Format Checker (`format-check`)
+### Format Checker (`format-check`) — Deprecated
 
-Check Python code formatting using various tools:
-
-- black: Code formatting
-- isort: Import sorting
-- flake8: Style guide enforcement
-- mypy: Type checking
-- bandit: Security checks
-
-```bash
-format-check --help     # Show help
-format-check file.py    # Check single file
-format-check dir/       # Check directory
-```
+`tools/format_checker.py` is kept for reference only and no longer
+recommended. It duplicates what a standard `pre-commit` setup does better
+(proper `--check` semantics, no custom wrapper to maintain), and as shipped
+it reformats files in place rather than only checking them. It is not
+symlinked during installation. Use `pre-commit` with black/isort/flake8
+hooks instead.
 
 ### SSH Identity Switcher (`ssh-switcher`)
 
@@ -91,7 +86,7 @@ Switch between different SSH identities easily.
 ```bash
 ssh-switcher --help      # Show help
 ssh-switcher --list      # List available identities
-ssh-switcher personal    # Switch to personal key
+ssh-switcher cuong       # Switch to personal key
 ssh-switcher            # Interactive mode
 ```
 
@@ -102,7 +97,7 @@ To update to the latest version:
 ```bash
 cd automation-scripts  # or wherever you cloned the repo
 git pull
-pip install -r requirements-dev.txt  # Update dependencies
+pip install -r requirements.txt  # Update dependencies
 ```
 
 ## Uninstallation
@@ -110,7 +105,7 @@ pip install -r requirements-dev.txt  # Update dependencies
 1. Remove symbolic links:
 
 ```bash
-rm ~/bin/create-web-link ~/bin/format-check ~/bin/ssh-switcher
+rm ~/.bin/create-web-link ~/.bin/ssh-switcher
 ```
 
 2. Remove repository (optional):
@@ -123,7 +118,7 @@ rm -rf automation-scripts
 
 3. Remove PATH from ~/.zshrc (optional):
    - Open ~/.zshrc in your editor
-   - Remove the line: `export PATH="$HOME/bin:$PATH"`
+   - Remove the line: `export PATH="$HOME/.bin:$PATH"`
    - Run: `source ~/.zshrc`
 
 4. Remove bin directory (optional):

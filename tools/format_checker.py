@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Python code formatting checker.
 
+DEPRECATED: This script is no longer maintained. It duplicates what a
+standard `pre-commit` setup (https://pre-commit.com) already does better:
+running black/isort/flake8/mypy/bandit on staged files, with proper
+`--check` semantics and no custom wrapper code to maintain. Also note that
+as shipped, this script runs `black`/`isort` WITHOUT `--check`, so it
+reformats files in place rather than only reporting issues, despite the
+tool's name. Kept in the repo for reference only; do not build on it.
+
 This script checks and verifies Python code against coding conventions
 using multiple formatting tools: black, isort, flake8, and eradicate.
 
@@ -167,6 +175,10 @@ def check_code(paths: Tuple[Path, ...], verbose: bool) -> None:
         format-check directory/
     """
     try:
+        logger.warning(
+            "DEPRECATED: format-check is unmaintained and reformats files in place "
+            "(black/isort run without --check). Use `pre-commit` instead."
+        )
         check_dependencies()
 
         files = collect_python_files(paths)

@@ -134,3 +134,5 @@ celerybeat.pid
 *.dll
 *.exe
 *.o
+
+.memsearch/
